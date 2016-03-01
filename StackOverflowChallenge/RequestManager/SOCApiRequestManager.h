@@ -10,6 +10,12 @@
 typedef void (^Handler)(NSData *data, NSURLResponse *response, NSError *error);
 
 @interface SOCApiRequestManager : NSObject<NSURLSessionDataDelegate>
+/**
+ http POST request manager.
+ */
 -(void)httpPostWithUrl:(NSString*)urlStr params:(NSDictionary*)parameters;
+/**
+ http GET request manager.
+ */
 -(void)fetchUsersWithUrl:(NSString*)urlStr completionHandler:(Handler)handler;
 @end

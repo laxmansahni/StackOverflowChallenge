@@ -37,12 +37,14 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    //initialize managedObjectContext from AppDelegate's shared managedObjectContext
     if (!self.managedObjectContext) {
         self.managedObjectContext = ((SOCAppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
     }
     [self initializeFetchedResultsController];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    // if CoreData object graph is empty, fetch response from stackoverflow server
     if ([[[self.fetchedResultsController sections] firstObject] numberOfObjects] <= 0) {
         [self fetchUsersFromServer];
     }
@@ -53,7 +55,9 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+/**
+ Fetch response from stackoverflow user api.
+ */
 -(void)fetchUsersFromServer
 {
     _managedUsers = [[NSMutableArray alloc]init];
@@ -100,14 +104,16 @@
 
 }
 #pragma mark - Table view data source
-
+/**
+ Set number of sections based on fetchedResultsController'sections
+ */
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-//#warning Incomplete implementation, return the number of sections
     return [[self.fetchedResultsController sections] count];
 }
-
+/**
+ set data source of tableView based on records in CoreData object graph.
+ */
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-//#warning Incomplete implementation, return the number of rows
     NSArray *sections = [self.fetchedResultsController sections];
     id<NSFetchedResultsSectionInfo> sectionInfo = [sections objectAtIndex:section];
     
@@ -124,7 +130,6 @@
     // Here we use the new provided sd_setImageWithURL: method to load the web image
     [cell.imageView sd_setImageWithURL:[NSURL URLWithString:socuser.gravatar]
                       placeholderImage:[UIImage imageNamed:@"placeholder"]];
- //   cell.textLabel.text = [user objectForKey:@"display_name"];
     UILabel *nameLabel = (UILabel*)[cell viewWithTag:CellNameLabelTagValue];
     nameLabel.text = socuser.name;
     UILabel *goldLabel = (UILabel*)[cell viewWithTag:CellGoldLabelTagValue];
@@ -182,6 +187,9 @@
 */
 #pragma mark - Core Data stack
 
+/**
+ Save records in CoreData object graph.
+ */
 -(void)saveUser:(NSArray*)jsonUsers
 {
     for (User *user in jsonUsers) {
@@ -194,15 +202,9 @@
     }
 }
 
-//-(NSMutableArray*)fetchRecords
-//{
-//    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"User"];
-//    NSError *error;
-//    NSArray *records = [self.managedObjectContext executeFetchRequest:request error:&error];
-//    NSLog(@"users from db %lu", [records count]);
-//    return (NSMutableArray*)records;
-//}
-
+/**
+Fetch records from CoreData object graph.
+*/
 - (void)initializeFetchedResultsController
 {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"User"];

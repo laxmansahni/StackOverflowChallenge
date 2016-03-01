@@ -10,6 +10,9 @@
 
 @implementation SOCApiRequestManager
 
+/**
+ http POST request manager.
+ */
 -(void)httpPostWithUrl:(NSString*)urlStr params:(NSDictionary*)parameters
 {
     NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
@@ -49,6 +52,9 @@
     [dataTask resume];
     
 }
+/**
+ http GET request manager.
+ */
 -(void)fetchUsersWithUrl:(NSString*)urlStr completionHandler:(Handler)handler
 {
     NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];

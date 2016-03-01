@@ -14,7 +14,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface User (CoreDataProperties)
-
+//properties of ManagedObjetModel User
 @property (nullable, nonatomic, retain) NSString *name;
 @property (nullable, nonatomic, retain) NSNumber *goldBadge;
 @property (nullable, nonatomic, retain) NSNumber *silverBadge;
