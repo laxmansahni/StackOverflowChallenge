@@ -10,13 +10,14 @@ SDWebImage is used for caching of gravatar.
 Test target runs unit tests to validate response from server and loading of TableView.
 Project uses CocoaPods to install SDWebImage library.
 Project should be run from StackOverflowChallenge.xcworkspace rather than .xcodeproj .
+Project is configured for continuous integration using Travis CI.
 
 ## Technical Details ## 
-*Language: Objective-C
-*OS: iOS9
-*Device: iPhone 5/5s/6/6+/6s/6s+
+* Language: Objective-C
+* OS: iOS9
+* Device: iPhone 5/5s/6/6+/6s/6s+
 
 ## Third-party libraries ##
-*SDWebImage
-*UILoadingView
+* SDWebImage
+* UILoadingView
 
