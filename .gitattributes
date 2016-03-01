@@ -1,0 +1,7 @@
+*       text=auto
+
+*.md 		text
+*.storyboard 	-merge eol=lf
+*.pbxproj 	-merge eol=lf
+*.xib 		-merge eol=lf
+*.nib 		-merge eol=lf
